@@ -7,10 +7,12 @@
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
     "watch": "nodemon --watch src --ext ts --exec ts-node src/index.ts",
-    "format": "prettier --write \"src/**/*.{ts,js,json}\""
+    "format": "prettier --write \"src/**/*.{ts,js,json}\"",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "axios": "^1.10.0",
+    "dotenv": "^17.2.0",
     "express": "^4.21.2"
   },
   "devDependencies": {

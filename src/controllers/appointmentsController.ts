@@ -3,16 +3,21 @@ import { Request, Response } from "express";
 import { healthieApiClient } from "../utils/healthieApiClient";
 import { getAppointmentQuery } from "../graphql/queries/getAppointment";
 
-export const getPatientEligibility = async (req: Request, resp: Response) => {
-  const { appointmentId } = req.params;
-  const getAppointmentQueryVar = { id: appointmentId };
+export const getPatientEligibility = async (
+  request: Request,
+  response: Response
+) => {
+  const { resource_id } = request.body;
+  const getAppointmentQueryVar = { id: resource_id };
 
-  const queryResp = await healthieApiClient.post("", {
-    getAppointmentQuery,
-    getAppointmentQueryVar,
-  });
-
-  const { appointment } = response.data;
-
-  console.log("APPOINTMENT DATA", appointment);
+  try {
+    const queryResp = await healthieApiClient.post("", {
+      query: getAppointmentQuery,
+      variables: getAppointmentQueryVar,
+    });
+    const { appointment } = queryResp.data.data;
+    console.log("APPOINTMENT", appointment);
+  } catch (error) {
+    console.error("Error querying the Healthie API", error);
+  }
 };

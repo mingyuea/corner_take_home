@@ -1,6 +1,8 @@
 import { Router } from "express";
-import { getPatientEligibility } from "../";
+import { getPatientEligibility } from "../controllers/appointmentsController";
 
 const router = Router();
 
-router.get("/check_eligibility");
+router.post("/check_eligibility", getPatientEligibility);
+
+export default router;
